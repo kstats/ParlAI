@@ -81,7 +81,7 @@ def main():
                 world.parley()
                 iteration += 1
 
-
+            world.save_data()
             world.shutdown()
 
         mturk_manager.start_task(
