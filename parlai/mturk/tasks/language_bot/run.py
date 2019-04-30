@@ -9,17 +9,17 @@ from parlai.mturk.core.mturk_manager import MTurkManager
 from parlai.mturk.tasks.language_bot.worlds import \
     MTurkLangDialogWorld, MTurkLangDialogOnboardWorld
 from parlai.agents.local_human.local_human import LocalHumanAgent
-from parlai.mturk.tasks.multi_agent_dialog.task_config import task_config
+from parlai.mturk.tasks.language_bot.task_config import task_config
 
 MAX_TURNS = 20
 
 def main():
     """
-    This task consists of one local human agent and two MTurk agents,
+    This task consists of two MTurk agents,
     each MTurk agent will go through the onboarding step to provide
     information about themselves, before being put into a conversation.
     You can end the conversation by sending a message ending with
-    `[DONE]` from human_1.
+    `[DONE]` from human_1 OR maxing out with 20 turns.
     """
     argparser = ParlaiParser(False, False)
     argparser.add_parlai_data_path()
@@ -80,6 +80,7 @@ def main():
             while not world.episode_done() and iteration < MAX_TURNS:
                 world.parley()
                 iteration += 1
+
 
             world.shutdown()
 
